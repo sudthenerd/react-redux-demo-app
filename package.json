@@ -3,10 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@types/jest": "24.0.17",
-    "@types/node": "12.7.1",
-    "@types/react": "16.8.25",
-    "@types/react-dom": "16.8.5",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
@@ -41,6 +37,15 @@
     ]
   },
   "devDependencies": {
+    "@types/jest": "24.0.17",
+    "@types/react": "16.8.23",
+    "@types/react-dom": "16.8.4",
+    "@types/node": "^12.7.1",
+    "@types/react-bootstrap": "^0.32.19",
+    "@types/react-datepicker": "^2.8.0",
+    "@types/react-redux": "^7.1.1",
+    "@types/react-router-dom": "^4.3.4",
+    "@types/yup": "^0.26.21",
     "cross-env": "^5.2.0"
   }
 }
