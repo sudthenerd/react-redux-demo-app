@@ -3,10 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bootstrap": "^4.3.1",
     "react": "^16.8.6",
+    "react-bootstrap": "^1.0.0-beta.10",
     "react-dom": "^16.8.6",
+    "react-redux": "^7.1.0",
+    "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
-    "typescript": "3.5.3"
+    "redux": "^4.0.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -32,20 +36,21 @@
     "development": [
       ">0.2%",
       "not dead",
-      "not op_mini all",
       "ie >= 9"
     ]
   },
   "devDependencies": {
+    "typescript": "3.5.3",
     "@types/jest": "24.0.17",
-    "@types/react": "16.8.23",
-    "@types/react-dom": "16.8.4",
     "@types/node": "^12.7.1",
+    "@types/react": "16.8.23",
     "@types/react-bootstrap": "^0.32.19",
     "@types/react-datepicker": "^2.8.0",
+    "@types/react-dom": "16.8.4",
     "@types/react-redux": "^7.1.1",
     "@types/react-router-dom": "^4.3.4",
     "@types/yup": "^0.26.21",
-    "cross-env": "^5.2.0"
+    "cross-env": "^5.2.0",
+    "redux-devtools": "^3.5.0"
   }
 }
