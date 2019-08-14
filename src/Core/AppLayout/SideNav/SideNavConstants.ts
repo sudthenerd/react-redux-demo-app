@@ -1,0 +1,1 @@
+export const SHOW_SIDE_MENU_ITEMS = 'SHOW SIDE MENU ITEMS';
