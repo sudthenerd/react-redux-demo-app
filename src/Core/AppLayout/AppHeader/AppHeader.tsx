@@ -32,6 +32,15 @@ class AppHeader extends Component<any, any> {
                 }
             ]
         }
+
+        const headerMenus: HeaderMenu = this.state.headerMenus;
+
+        if (window.location.pathname.includes('todo')) {
+            this.props.showSideMenuItems(headerMenus[1].subMenu);
+            return;
+        } else {
+            this.props.showSideMenuItems([]);
+        }
     }
 
     public render() {

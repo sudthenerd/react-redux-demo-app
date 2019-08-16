@@ -12,11 +12,9 @@ const App: React.FC = () => {
       <header className="App-header">
           <h1 className="d-flex justify-content-center bg-light text-secondary">Learn React</h1>
       </header>
-      <Router>
-        <AppLayout>
-          <AppRouting />
-        </AppLayout>
-      </Router>
+      <AppLayout>
+        <AppRouting />
+      </AppLayout>
     </div>
   );
 }

@@ -12,10 +12,10 @@ class SideNav extends React.Component<any, any>{
 
     public render() {
         return (
-            <ul className="list-group">
+            !!this.props.sideMenuItems.length && <ul className="list-group">
                 {
-                    this.props.sideMenuItems.map((item: any) => 
-                        <li className="list-group-item">
+                    this.props.sideMenuItems.map((item: any, index: number) => 
+                        <li className="list-group-item" key={index}>
                             <Link to={item.path}>{item.menuName}</Link>
                         </li>
                     )
