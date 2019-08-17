@@ -10,7 +10,7 @@ class ToDo extends React.Component<any, any> {
     public render() {
         return (
             <div>
-                <h1>TO DO APP</h1>
+                <h4 className="text-left text-secondary">TO DO APP</h4>
                 <ToDoRouting />
             </div>
         )

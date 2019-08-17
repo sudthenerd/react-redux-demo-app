@@ -6,23 +6,21 @@ import { fetchToDos, getToDos } from './actions/ToDoListActions';
 class ToDoList extends React.Component<any, any> {
     constructor(props) {
         super(props);
-        // axios.get('https://api.github.com/users')
-        // .then(response => {
-            //     console.log(this.props);
-            //     this.props.fetchToDos(response.data);
-        // })
-        this.props.getToDos();
+
+        if (this.props.todos && !this.props.todos.length) {
+            this.props.getToDos();
+        }
     }
 
-    public getToDoList() {
-
-    }
     public render() {
-        return <ul className="list-group d-flex justify-content-center">
-                TO DO LIST
+        return !!this.props.todos.length && <ul className="list-group d-flex justify-content-center align-items-center">
                     { 
-                        this.props.todos && this.props.todos.map((data: any, index: number) =>
-                            <li className="list-group-item" key={index}>{data.login}</li>
+                         this.props.todos.map((data: any, index: number) =>
+                            <li className="list-group-item d-flex col-6" key={index}>
+                                <span className="col">{data.name}</span>
+                                <button className="btn btn-primary">Edit</button>
+                                <button className="btn btn-danger ml-4">Delete</button>
+                            </li>
                         )
                     }
                </ul>
@@ -30,7 +28,8 @@ class ToDoList extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any) => ({
-    todos: state.toDo.list.todos
+    todos: state.toDo.list.todos,
+    state: state
 })
 
 const mapDispatchToProps = (dispatch: any) => ({

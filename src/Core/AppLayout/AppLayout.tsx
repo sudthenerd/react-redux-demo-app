@@ -18,7 +18,7 @@ class AppLayout extends React.Component<any, any> {
                     <AppHeader />
                     <main className="d-flex">
                         <SideNav />
-                        <section className="col p-3">
+                        <section className="col px-3 pb-3 bg-light mx-3 rounded justify-content-strech">
                             {this.props.children}
                         </section>
                     </main>

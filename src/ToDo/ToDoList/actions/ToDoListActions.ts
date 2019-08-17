@@ -13,7 +13,18 @@ export function getToDos() {
     return function(dispatch) {
         axios.get('https://api.github.com/users')
         .then(response => {
-            dispatch(fetchToDos(response.data))
+            const todoList: any = adaptResponse(response.data)
+            dispatch(fetchToDos(todoList));
         })
     }
+}
+
+function adaptResponse(responseData: any) {
+    let adaptedResponse: any = [];
+    responseData.forEach((responseDataItem: any, index: number) => {
+        const todoItem: any = {index: index, name: responseDataItem.login};
+        adaptedResponse.push(todoItem);
+    })
+
+    return adaptedResponse;
 }
