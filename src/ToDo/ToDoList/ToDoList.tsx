@@ -1,26 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 // --------------------------------------------- //
-import { fetchToDos } from './actions/ToDoListActions';
+import { fetchToDos, getToDos } from './actions/ToDoListActions';
 
 class ToDoList extends React.Component<any, any> {
     constructor(props) {
         super(props);
         // axios.get('https://api.github.com/users')
         // .then(response => {
-        //     console.log(response)
+            //     console.log(this.props);
+            //     this.props.fetchToDos(response.data);
         // })
-        console.log(props);
-        // this.props.fetchToDos();
-        
+        this.props.getToDos();
     }
 
     public getToDoList() {
 
     }
     public render() {
-        return <ul className="list-group">
+        return <ul className="list-group d-flex justify-content-center">
+                TO DO LIST
                     { 
                         this.props.todos && this.props.todos.map((data: any, index: number) =>
                             <li className="list-group-item" key={index}>{data.login}</li>
@@ -35,10 +34,8 @@ const mapStateToProps = (state: any) => ({
 })
 
 const mapDispatchToProps = (dispatch: any) => ({
-    fetchToDos: () => dispatch(axios.get('https://api.github.com/users')
-    .then(response => {
-        fetchToDos(response.data)
-    }))
+    fetchToDos: (responseData: any) => dispatch(fetchToDos(responseData)),
+    getToDos: () => dispatch(getToDos())
 })
 
 export default connect(
