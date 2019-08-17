@@ -20,10 +20,8 @@ class ToDoAdd extends React.Component<any, any> {
                     return errors;
                 }}
                 onSubmit={(values, { setSubmitting }) => {
-                    setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
+                    console.log('values', values);
                     setSubmitting(false);
-                    }, 400);
                 }}
                 >
                 {({ isSubmitting }) => (
