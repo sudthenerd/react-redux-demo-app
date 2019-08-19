@@ -5,9 +5,7 @@ function toDoListReducer(state: any = {todos: []}, action: any) {
         case FETCH_TODOS:
             return { ...state, todos: action.payload };
         case DELETE_TODO:
-            const todos: any = [...state.todos];
-            todos.splice(action.index, 1);
-            return { ...state, todos: todos };
+            return { ...state, todos: action.payload };
         default:
             return state;
     }
