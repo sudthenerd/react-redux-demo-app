@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 // --------------------------------------------------- //
 import { showSideMenuItems } from './actions/HeaderActions';
+import AppHeaderView from './presentation/AppHeaderView';
 
 class SideNavItem {
     public menuName?: string;
@@ -18,7 +19,6 @@ class HeaderMenu {
 class AppHeader extends Component<any, any> {
     constructor(props) {
         super(props);
-        console.log(this.props);
         this.state = {
             headerMenus: [
                 { menuName: 'Home', path: '/', subMenu: []},
@@ -44,17 +44,7 @@ class AppHeader extends Component<any, any> {
     }
 
     public render() {
-        return (
-            <ul className="nav d-flex justify-content-center bg-light mb-4">
-                {
-                    this.state.headerMenus.map((item: HeaderMenu, index: number) => 
-                        <li className="nav-item" key={index} onClick={this.props.showSideMenuItems.bind(this, item.subMenu)}>
-                            <Link className="nav-link"  to={item.path}>{item.menuName}</Link>
-                        </li>
-                    )
-                }
-            </ul>
-        );
+        return <AppHeaderView headerMenus={this.state.headerMenus} {...this.props}/>
     }
 }
 

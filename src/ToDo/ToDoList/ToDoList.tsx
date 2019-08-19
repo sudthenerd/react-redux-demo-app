@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 // --------------------------------------------- //
-import { fetchToDos, getToDos } from './actions/ToDoListActions';
+import ToDoListView from './presentation/ToDoListView';
+import { getToDos, deleteToDo, editToDo } from './actions/ToDoListActions';
 
 class ToDoList extends React.Component<any, any> {
     constructor(props) {
@@ -13,28 +14,18 @@ class ToDoList extends React.Component<any, any> {
     }
 
     public render() {
-        return !!this.props.todos.length && <ul className="list-group d-flex justify-content-center align-items-center">
-                    { 
-                         this.props.todos.map((data: any, index: number) =>
-                            <li className="list-group-item d-flex col-6" key={index}>
-                                <span className="col">{data.name}</span>
-                                <button className="btn btn-primary">Edit</button>
-                                <button className="btn btn-danger ml-4">Delete</button>
-                            </li>
-                        )
-                    }
-               </ul>
+        return <ToDoListView {...this.props}/>
     }
 }
 
 const mapStateToProps = (state: any) => ({
-    todos: state.toDo.list.todos,
-    state: state
+    todos: state.toDo.list.todos
 })
 
 const mapDispatchToProps = (dispatch: any) => ({
-    fetchToDos: (responseData: any) => dispatch(fetchToDos(responseData)),
-    getToDos: () => dispatch(getToDos())
+    getToDos: () => dispatch(getToDos()),
+    deleteToDo: (index: number) => dispatch(deleteToDo(index)),
+    editToDo: (data: any) => dispatch(editToDo(data))
 })
 
 export default connect(

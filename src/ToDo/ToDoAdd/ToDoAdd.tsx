@@ -1,5 +1,8 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+
+import { connect } from 'react-redux';
+import { addToDo } from './actions/ToDoAddActions';
 // ------------------------------------- //
 
 class ToDoAdd extends React.Component<any, any> {
@@ -11,7 +14,7 @@ class ToDoAdd extends React.Component<any, any> {
         return (
             <div>
               <Formik
-                initialValues={{ todoName: ''}}
+                initialValues={{ todoName: (this.props.toDoItem && this.props.editMode) && this.props.toDoItem.name || ''}}
                 validate={values => {
                     let errors: any = {};
                     if (!values.todoName) {
@@ -20,12 +23,18 @@ class ToDoAdd extends React.Component<any, any> {
                     return errors;
                 }}
                 onSubmit={(values, { setSubmitting }) => {
-                    console.log('values', values);
+                    const editMode: boolean = this.props.editMode;
+                    this.props.addToDo({
+                        index: editMode ? this.props.toDoItem.index : this.props.todos.length,
+                        name: values.todoName,
+                        editMode: editMode
+                    });
                     setSubmitting(false);
+                    this.props.history.push('/todo/list')
                 }}
                 >
                 {({ isSubmitting }) => (
-                    <Form className="d-flex col-8 align-items-start px-0 py-2">
+                    <Form className="d-flex col-6 align-items-start px-0 py-2">
                         <div className="form-group col px-0">
                             <Field className="form-control" type="text" name="todoName" />
                             <ErrorMessage name="todoName" component="div" />
@@ -41,8 +50,21 @@ class ToDoAdd extends React.Component<any, any> {
     }
 }
 
+const mapStateToProps: any = (state: any) => ({
+    todos: state.toDo.list.todos,
+    toDoItem: state.toDo.toDoItem.data,
+    editMode: state.toDo.editMode
+})
+
+const mapDispatchToProps: any = (dispatch: any) => ({
+    addToDo: (toDoItem: any) => dispatch(addToDo(toDoItem))
+})
+
 // const ToDoAdd: React.FC = () => {
 //     return <h1>TO DO ADD</h1>
 // }
 
-export default ToDoAdd;
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ToDoAdd);

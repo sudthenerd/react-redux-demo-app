@@ -1,27 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { showSideMenuItems } from './actions/SideNavAction';
 // --------------------------------------------------- //
+import { showSideMenuItems } from './actions/SideNavAction';
+import SideNavView from './presentation/SideNavView';
 
 class SideNav extends React.Component<any, any>{
     constructor(props) {
         super(props);
-        console.log(this.props);
     }
 
     public render() {
-        return (
-            !!this.props.sideMenuItems.length && <ul className="list-group">
-                {
-                    this.props.sideMenuItems.map((item: any, index: number) => 
-                        <li className="list-group-item" key={index}>
-                            <Link to={item.path}>{item.menuName}</Link>
-                        </li>
-                    )
-                }
-            </ul>
-        );
+        return <SideNavView {...this.props}/>
     }
 }
 
