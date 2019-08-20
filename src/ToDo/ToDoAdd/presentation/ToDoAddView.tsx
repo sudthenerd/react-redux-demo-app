@@ -21,10 +21,10 @@ const ToDoAddView: React.FC<any> = (props: any) => {
     return (
         <div>
             <Formik
-            initialValues={props.initialValues}
-            validate={props.validateForm}
-            onSubmit={props.onSubmit}
-            render={({isSubmitting}) => renderForm(isSubmitting)} />
+                initialValues={props.initialValues}
+                validate={props.validateForm}
+                onSubmit={props.onSubmit}
+                render={({isSubmitting}) => renderForm(isSubmitting)} />
         </div>
     )
 }
