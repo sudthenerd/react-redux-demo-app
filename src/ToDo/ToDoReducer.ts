@@ -2,14 +2,13 @@ import { combineReducers } from 'redux';
 import reduceReducers from 'reduce-reducers';
 // -------------------------------------------- //
 import  { toDoListReducer } from './ToDoList';
-import { toDoAddReducer } from './ToDoAdd';
 import { ADD_TODO } from './ToDoAdd/actions/ToDoAddActions';
 import { EDIT_TODO } from './ToDoList/ActionConstants';
 
 // export default combineReducers({ list: toDoListReducer, toDoItem: toDoAddReducer });
 
 export default reduceReducers(
-    combineReducers({ list: toDoListReducer, toDoItem: toDoAddReducer }),
+    combineReducers({ list: toDoListReducer }),
     // cross-cutting concerns because here `state` is the whole state tree
     (state: any = { editMode: false }, action: any) => {
       switch (action.type) {
@@ -22,3 +21,4 @@ export default reduceReducers(
       }
     }
   );
+  
