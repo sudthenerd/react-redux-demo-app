@@ -14,22 +14,9 @@ export default reduceReducers(
     (state: any = { editMode: false }, action: any) => {
       switch (action.type) {
         case ADD_TODO:
-          {
-            if (state.toDoItem.editMode) {
-              const todos: any = [...state.list.todos];
-              todos.splice(state.toDoItem.data.index, 1, state.toDoItem.data);
-
-              const toDoItem: any = { ...state.toDoItem, editMode: false };
-
-              return { ...state, list: {todos: todos}, editMode: false, toDoItem: toDoItem };
-            }
-
-            const todos = [state.toDoItem.data, ...state.list.todos];
-            return { ...state, list: {todos: todos} };
-          }
+            return { ...state, ...action.payload };
         case EDIT_TODO:
-            const toDoItem = { data: action.payload }
-            return { ...state, toDoItem: toDoItem, editMode: true };
+            return { ...state, ...action.payload };
         default: 
             return state;
       }

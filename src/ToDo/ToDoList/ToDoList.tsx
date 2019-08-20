@@ -2,8 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 // --------------------------------------------- //
 import ToDoListView from './presentation/ToDoListView';
-import { deleteToDo, editToDo } from './actions/ToDoListActions';
-import { getToDos, deleteToDoItem } from './middleware/ToDoListMiddleware';
+import { getToDos, deleteToDoItem, editToDoItem } from './middleware/ToDoListMiddleware';
 
 class ToDoList extends React.Component<any, any> {
     constructor(props) {
@@ -26,7 +25,7 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: any) => ({
     getToDos: () => dispatch(getToDos()),
     deleteToDo: (index: number) => dispatch(deleteToDoItem(index)),
-    editToDo: (data: any) => dispatch(editToDo(data))
+    editToDo: (data: any) => dispatch(editToDoItem(data))
 })
 
 export default connect(

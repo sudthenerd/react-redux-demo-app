@@ -1,8 +1,8 @@
 import axios from 'axios';
 // ----------------------------------------------- //
-import { fetchToDos, deleteToDo } from "../actions/ToDoListActions";
+import { fetchToDos, deleteToDo, editToDo } from "../actions/ToDoListActions";
 
-export function getToDos() {
+export const getToDos = () => {
     return function(dispatch) {
         axios.get('https://api.github.com/users')
         .then(response => {
@@ -12,11 +12,21 @@ export function getToDos() {
     }
 }
 
-export function deleteToDoItem(index) {
+export const deleteToDoItem = (index: number) => {
     return function(dispatch, getState) {
         const todos: any = [...getState().toDo.list.todos];
         todos.splice(index, 1);
         dispatch(deleteToDo(todos))
+    }
+}
+
+export const editToDoItem = (data: any) => {
+    return (dispatch) => {
+        const payload: any = { 
+            toDoItem: { ...data },
+            editMode: true 
+        };
+        dispatch(editToDo(payload));
     }
 }
 

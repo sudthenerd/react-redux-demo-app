@@ -2,12 +2,13 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 import { connect } from 'react-redux';
-import { addToDo } from './actions/ToDoAddActions';
+import { addToDoItem } from './middleware/ToDoAddMiddleware';
 // ------------------------------------- //
 
 class ToDoAdd extends React.Component<any, any> {
     constructor(props) {
         super(props);
+        console.log(this.props.toDo);
     }
 
     public render() {
@@ -24,11 +25,18 @@ class ToDoAdd extends React.Component<any, any> {
                 }}
                 onSubmit={(values, { setSubmitting }) => {
                     const editMode: boolean = this.props.editMode;
-                    this.props.addToDo({
-                        index: editMode ? this.props.toDoItem.index : this.props.todos.length,
-                        name: values.todoName,
-                        editMode: editMode
-                    });
+                    if (editMode) {
+                        this.props.addToDo({
+                            index: this.props.toDoItem.index,
+                            name: values.todoName,
+                            editMode: !!editMode
+                        });
+                    } else {
+                        this.props.addToDo({
+                            index:  this.props.todos.length,
+                            name: values.todoName,
+                        })
+                    }
                     setSubmitting(false);
                     this.props.history.push('/todo/list')
                 }}
@@ -52,12 +60,13 @@ class ToDoAdd extends React.Component<any, any> {
 
 const mapStateToProps: any = (state: any) => ({
     todos: state.toDo.list.todos,
-    toDoItem: state.toDo.toDoItem.data,
-    editMode: state.toDo.editMode
+    toDoItem: state.toDo.toDoItem,
+    editMode: state.toDo.editMode,
+    toDo: state.toDo
 })
 
 const mapDispatchToProps: any = (dispatch: any) => ({
-    addToDo: (toDoItem: any) => dispatch(addToDo(toDoItem))
+    addToDo: (toDoItem: any) => dispatch(addToDoItem(toDoItem))
 })
 
 // const ToDoAdd: React.FC = () => {
