@@ -45,12 +45,10 @@ class ToDoAdd extends React.Component<any, any> {
     }
 
     public render() {
-        return (
-            <ToDoAddView 
+        return <ToDoAddView
                 initialValues={ this.state.initialValues } 
                 validateForm={ this.validateForm }
                 onSubmit={ this.onSubmit } />
-        )
     }
 }
 
