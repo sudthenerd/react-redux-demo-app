@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const SideNavView: React.FC = (props: any): any => {
+const SideNavView: React.FC<any> = (props: any): any => {
     return (
         !!props.sideMenuItems.length && <ul className="list-group">
             {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const AppHeaderView: any = ({headerMenus, ...props}): any => {
+const AppHeaderView: React.FC<any> = ({headerMenus, ...props}): any => {
     return (
         !!headerMenus.length && <ul className="nav d-flex justify-content-center bg-light mb-4">
             {

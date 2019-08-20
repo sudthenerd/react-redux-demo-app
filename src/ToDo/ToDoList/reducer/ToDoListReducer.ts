@@ -1,4 +1,4 @@
-import { FETCH_TODOS, DELETE_TODO, EDIT_TODO } from '../ActionConstants';
+import { FETCH_TODOS, DELETE_TODO } from '../ActionConstants';
 
 function toDoListReducer(state: any = {todos: []}, action: any) {
     switch(action.type) {

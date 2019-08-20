@@ -1,9 +1,8 @@
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-
 import { connect } from 'react-redux';
 // ------------------------------------- //
 import { addToDoItem } from './middleware/ToDoAddMiddleware';
+import ToDoAddView from './presentation/ToDoAddView';
 
 class ToDoAdd extends React.Component<any, any> {
     constructor(props) {
@@ -11,6 +10,9 @@ class ToDoAdd extends React.Component<any, any> {
         this.state = {
             initialValues: { todoName: (this.props.toDoItem && this.props.editMode) && this.props.toDoItem.name || '' }
         }
+
+        this.validateForm = this.validateForm.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     private validateForm(values: any) {
@@ -24,47 +26,30 @@ class ToDoAdd extends React.Component<any, any> {
     }
 
     private onSubmit(values, { setSubmitting, resetForm }) {
-            const editMode: boolean = this.props.editMode;
-            if (editMode) {
-                this.props.addToDo({
-                    index: this.props.toDoItem.index,
-                    name: values.todoName,
-                    editMode: !!editMode
-                });
-            } else {
-                this.props.addToDo({
-                    index:  this.props.todos.length,
-                    name: values.todoName,
-                })
-            }
-            setSubmitting(false);
-            resetForm();
-            this.props.history.push('/todo/list')
-    }
-
-    private renderForm(isSubmitting: any) {
-        return (
-            <Form className="d-flex col-6 align-items-start px-0 py-2">
-                <div className="form-group col px-0">
-                    <Field className="form-control" type="text" name="todoName" placeholder="Enter To Do Item..."/>
-                    <ErrorMessage name="todoName" component="div" />
-                </div>
-                <button className="btn btn-primary ml-3" type="submit" disabled={isSubmitting}>
-                    Add
-                </button>
-            </Form>
-        );
+        const editMode: boolean = this.props && this.props.editMode;
+        if (editMode) {
+            this.props.addToDo({
+                index: this.props.toDoItem.index,
+                name: values.todoName,
+                editMode: !!editMode
+            });
+        } else {
+            this.props.addToDo({
+                index:  this.props.todos.length,
+                name: values.todoName,
+            })
+        }
+        setSubmitting(false);
+        resetForm();
+        this.props.history.push('/todo/list')
     }
 
     public render() {
         return (
-            <div>
-              <Formik
-                initialValues={this.state.initialValues}
-                validate={this.validateForm.bind(this)}
-                onSubmit={this.onSubmit.bind(this)}
-                render={({isSubmitting}) => this.renderForm(isSubmitting)} />
-            </div>
+            <ToDoAddView 
+                initialValues={ this.state.initialValues } 
+                validateForm={ this.validateForm }
+                onSubmit={ this.onSubmit } />
         )
     }
 }
