@@ -1,24 +1,30 @@
-import { combineReducers } from 'redux';
-import reduceReducers from 'reduce-reducers';
-// -------------------------------------------- //
-import  { toDoListReducer } from './ToDoList';
 import { ADD_TODO } from './ToDoAdd/actions/ToDoAddActions';
-import { EDIT_TODO } from './ToDoList/ActionConstants';
+import { UPDATE_TODO_LIST, DELETE_TODO, EDIT_TODO } from './ToDoList/actions/ToDoListActions';
 
-// export default combineReducers({ list: toDoListReducer, toDoItem: toDoAddReducer });
-
-export default reduceReducers(
-    combineReducers({ list: toDoListReducer }),
-    // cross-cutting concerns because here `state` is the whole state tree
-    (state: any = { editMode: false }, action: any) => {
+const toDoReducer = (state: any = { editMode: false, list: [], toDoItem: {} }, action: any) => {
       switch (action.type) {
+        case UPDATE_TODO_LIST:
+            return { ...state, list: action.payload };
+        case DELETE_TODO: {
+            const list: any = [...state.list];
+            list.splice(action.index, 1);
+            return { ...state, list: list };
+        }
         case ADD_TODO:
-            return { ...state, ...action.payload };
+            const list: any = [...state.list];
+            if (state.editMode) {
+              list.splice(action.payload.index, 1, action.payload);
+              return { ...state, list: list, editMode: false };
+            }
+
+            list.splice(0, 0, action.payload);
+            return { ...state, list: list };
         case EDIT_TODO:
-            return { ...state, ...action.payload };
+            return { ...state, toDoItem: action.payload, editMode: true };
         default: 
             return state;
       }
-    }
-  );
+}
+
+export default toDoReducer;
   

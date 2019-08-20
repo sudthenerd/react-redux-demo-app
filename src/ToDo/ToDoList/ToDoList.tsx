@@ -11,15 +11,26 @@ class ToDoList extends React.Component<any, any> {
         if (this.props.todos && !this.props.todos.length) {
             this.props.getToDos();
         }
+
+        this.onEdit = this.onEdit.bind(this);
+    }
+
+    private onEdit(data: any, index) {
+        data.index = index;
+        this.props.editToDo(data);
+        this.props.history.push('/todo/add');
     }
 
     public render() {
-        return <ToDoListView {...this.props}/>
+        return <ToDoListView
+                onEdit = { this.onEdit }
+                deleteToDo = { this.props.deleteToDo }
+                todos = { this.props.todos } />
     }
 }
 
 const mapStateToProps = (state: any) => ({
-    todos: state.toDo.list.todos
+    todos: state.toDo.list
 })
 
 const mapDispatchToProps = (dispatch: any) => ({

@@ -1,32 +1,26 @@
 import axios from 'axios';
 // ----------------------------------------------- //
-import { fetchToDos, deleteToDo, editToDo } from "../actions/ToDoListActions";
+import { updateToDoList, deleteToDo, editToDo } from "../actions/ToDoListActions";
 
 export const getToDos = () => {
     return function(dispatch) {
         axios.get('https://api.github.com/users')
         .then(response => {
-            const todoList: any = adaptResponse(response.data)
-            dispatch(fetchToDos(todoList));
+            const toDoList: any = adaptResponse(response.data)
+            dispatch(updateToDoList(toDoList));
         })
     }
 }
 
 export const deleteToDoItem = (index: number) => {
-    return function(dispatch, getState) {
-        const todos: any = [...getState().toDo.list.todos];
-        todos.splice(index, 1);
-        dispatch(deleteToDo(todos))
+    return function(dispatch) {
+        dispatch(deleteToDo(index))
     }
 }
 
 export const editToDoItem = (data: any) => {
     return (dispatch) => {
-        const payload: any = { 
-            toDoItem: { ...data },
-            editMode: true 
-        };
-        dispatch(editToDo(payload));
+        dispatch(editToDo(data));
     }
 }
 

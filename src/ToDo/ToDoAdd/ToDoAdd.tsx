@@ -27,18 +27,11 @@ class ToDoAdd extends React.Component<any, any> {
 
     private onSubmit(values, { setSubmitting, resetForm }) {
         const editMode: boolean = this.props && this.props.editMode;
-        if (editMode) {
-            this.props.addToDo({
-                index: this.props.toDoItem.index,
-                name: values.todoName,
-                editMode: !!editMode
-            });
-        } else {
-            this.props.addToDo({
-                index:  this.props.todos.length,
-                name: values.todoName,
-            })
-        }
+        this.props.addToDo({
+            index: editMode ? this.props.toDoItem.index : this.props.todos.length,
+            name: values.todoName,
+            editMode: !!editMode
+        });
         setSubmitting(false);
         resetForm();
         this.props.history.push('/todo/list')
@@ -46,14 +39,14 @@ class ToDoAdd extends React.Component<any, any> {
 
     public render() {
         return <ToDoAddView
-                initialValues={ this.state.initialValues } 
-                validateForm={ this.validateForm }
-                onSubmit={ this.onSubmit } />
+                initialValues = { this.state.initialValues } 
+                validateForm = { this.validateForm }
+                onSubmit = { this.onSubmit } />
     }
 }
 
 const mapStateToProps: any = (state: any) => ({
-    todos: state.toDo.list.todos,
+    todos: state.toDo.list,
     toDoItem: state.toDo.toDoItem,
     editMode: state.toDo.editMode
 })

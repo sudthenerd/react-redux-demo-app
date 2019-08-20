@@ -1,16 +1,18 @@
-import { FETCH_TODOS, DELETE_TODO, EDIT_TODO } from '../ActionConstants';
+export const UPDATE_TODO_LIST = 'UPDATE TODO LIST';
+export const DELETE_TODO = 'DELETE TODO ITEM';
+export const EDIT_TODO = 'EDIT TODO ITEM';
 
-export const fetchToDos = (payload: any) => {
+export const updateToDoList = (payload: any) => {
     return {
-        type: FETCH_TODOS,
+        type: UPDATE_TODO_LIST,
         payload: payload
     }
 }
 
-export const deleteToDo = (payload: any) => {
+export const deleteToDo = (index: number) => {
     return {
         type: DELETE_TODO,
-        payload: payload
+        index: index
     }
 }
 
