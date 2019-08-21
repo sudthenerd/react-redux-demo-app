@@ -1,5 +1,6 @@
 import AppLayout from './AppLayout';
 import Toaster, { toasterReducer, showToaster, hideToaster} from './Toaster';
+import Loader, { loaderReducer, showLoader, hideLoader } from './Loader';
 
 export default AppLayout;
-export { Toaster, toasterReducer, showToaster, hideToaster };
+export { Loader, Toaster, toasterReducer, showToaster, hideToaster, loaderReducer, showLoader, hideLoader };

@@ -1,7 +1,7 @@
 import React from 'react';
 // -------------------------------------------- //
 import AppRouting from './AppRouting';
-import AppLayout, { Toaster } from './Core';
+import AppLayout, { Toaster, Loader } from './Core';
 
 const App: React.FC = () => {
   return (
@@ -9,6 +9,7 @@ const App: React.FC = () => {
       <header className="App-header">
           <h1 className="d-flex justify-content-center bg-light text-secondary">Learn React</h1>
       </header>
+      <Loader />
       <AppLayout>
         <AppRouting />
       </AppLayout>

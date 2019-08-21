@@ -1,14 +1,16 @@
 import axios from 'axios';
 // ----------------------------------------------- //
 import { updateToDoList, deleteToDo, editToDo } from "../actions/ToDoListActions";
-import { showToaster } from '../../../Core';
+import { showToaster, showLoader, hideLoader } from '../../../Core';
 
 export const getToDos = () => {
     return function(dispatch) {
+        dispatch(showLoader())
         axios.get('https://api.github.com/users')
         .then(response => {
             const toDoList: any = adaptResponse(response.data)
             dispatch(updateToDoList(toDoList));
+            dispatch(hideLoader())
         })
     }
 }
