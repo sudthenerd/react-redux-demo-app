@@ -1,10 +1,7 @@
 import React from 'react';
-import  { 
-  BrowserRouter as Router
-} from 'react-router-dom';
 // -------------------------------------------- //
 import AppRouting from './AppRouting';
-import AppLayout from './Core';
+import AppLayout, { Toaster } from './Core';
 
 const App: React.FC = () => {
   return (
@@ -15,6 +12,7 @@ const App: React.FC = () => {
       <AppLayout>
         <AppRouting />
       </AppLayout>
+      <Toaster />
     </div>
   );
 }

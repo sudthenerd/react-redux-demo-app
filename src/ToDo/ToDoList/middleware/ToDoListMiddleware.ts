@@ -1,6 +1,7 @@
 import axios from 'axios';
 // ----------------------------------------------- //
 import { updateToDoList, deleteToDo, editToDo } from "../actions/ToDoListActions";
+import { showToaster } from '../../../Core';
 
 export const getToDos = () => {
     return function(dispatch) {
@@ -15,6 +16,7 @@ export const getToDos = () => {
 export const deleteToDoItem = (index: number) => {
     return function(dispatch) {
         dispatch(deleteToDo(index))
+        dispatch(showToaster('To Do Item Deleted Successfully')); 
     }
 }
 
