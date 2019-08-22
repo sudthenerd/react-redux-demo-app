@@ -1,7 +1,7 @@
 import axios from 'axios';
 // ----------------------------------------------- //
 import { updateToDoList, deleteToDo, editToDo } from "../actions/ToDoListActions";
-import { showToaster, showLoader, hideLoader } from '../../../Core';
+import { showToaster } from '../../../Core';
 
 // export const getToDos = () => {
 //     return function(dispatch) {
