@@ -15,6 +15,7 @@
     "react-toastify": "^5.3.2",
     "reduce-reducers": "^1.0.4",
     "redux": "^4.0.4",
+    "redux-promise-middleware": "^6.1.1",
     "redux-thunk": "^2.3.0",
     "yup": "^0.27.0"
   },

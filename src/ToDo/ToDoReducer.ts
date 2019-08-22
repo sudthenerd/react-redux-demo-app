@@ -1,10 +1,19 @@
 import { ADD_TODO } from './ToDoAdd/actions/ToDoAddActions';
-import { UPDATE_TODO_LIST, DELETE_TODO, EDIT_TODO } from './ToDoList/actions/ToDoListActions';
+import { 
+    DELETE_TODO, EDIT_TODO,
+    UPDATE_TODO_LIST_PENDING,
+    UPDATE_TODO_LIST_FULFILLED,
+    UPDATE_TODO_LIST_REJECTED 
+} from './ToDoList/actions/ToDoListActions';
 
 const toDoReducer = (state: any = { editMode: false, list: [], toDoItem: {} }, action: any) => {
       switch (action.type) {
-        case UPDATE_TODO_LIST:
-            return { ...state, list: action.payload };
+        case UPDATE_TODO_LIST_PENDING:
+            return { ...state, fetching: true };
+        case UPDATE_TODO_LIST_FULFILLED:
+            return { ...state, list: action.payload, fetching: false };
+        case UPDATE_TODO_LIST_REJECTED:
+            return { ...state, fetching: false };
         case DELETE_TODO: {
             const list: any = [...state.list];
             list.splice(action.index, 1);

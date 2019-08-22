@@ -1,6 +1,9 @@
-export const UPDATE_TODO_LIST = 'UPDATE TODO LIST';
-export const DELETE_TODO = 'DELETE TODO ITEM';
-export const EDIT_TODO = 'EDIT TODO ITEM';
+export const UPDATE_TODO_LIST = 'UPDATE_TODO_LIST';
+export const UPDATE_TODO_LIST_PENDING = 'UPDATE_TODO_LIST_PENDING';
+export const UPDATE_TODO_LIST_FULFILLED = 'UPDATE_TODO_LIST_FULFILLED';
+export const UPDATE_TODO_LIST_REJECTED = 'UPDATE_TODO_LIST_REJECTED';
+export const DELETE_TODO = 'DELETE_TODO_ITEM';
+export const EDIT_TODO = 'EDIT_TODO_ITEM';
 
 export const updateToDoList = (payload: any) => {
     return {

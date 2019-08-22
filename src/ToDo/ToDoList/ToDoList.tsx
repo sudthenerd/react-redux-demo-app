@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 // --------------------------------------------- //
 import ToDoListView from './presentation/ToDoListView';
 import { getToDos, deleteToDoItem, editToDoItem } from './middleware/ToDoListMiddleware';
+import { showLoader, hideLoader } from '../../Core';
 
 class ToDoList extends React.Component<any, any> {
     constructor(props) {
@@ -13,6 +14,14 @@ class ToDoList extends React.Component<any, any> {
         }
 
         this.onEdit = this.onEdit.bind(this);
+    }
+
+    componentWillUpdate(props) {
+        if (props.fetching) {
+            this.props.showLoader();
+        } else {
+            this.props.hideLoader();
+        }
     }
 
     private onEdit(data: any, index) {
@@ -30,13 +39,16 @@ class ToDoList extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any) => ({
-    todos: state.toDo.list
+    todos: state.toDo.list,
+    fetching: state.toDo.fetching
 })
 
 const mapDispatchToProps = (dispatch: any) => ({
     getToDos: () => dispatch(getToDos()),
     deleteToDo: (index: number) => dispatch(deleteToDoItem(index)),
-    editToDo: (data: any) => dispatch(editToDoItem(data))
+    editToDo: (data: any) => dispatch(editToDoItem(data)),
+    showLoader: () => dispatch(showLoader()),
+    hideLoader: () => dispatch(hideLoader())
 })
 
 export default connect(
