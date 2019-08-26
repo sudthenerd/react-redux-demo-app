@@ -25,8 +25,16 @@ class AppHeader extends Component<any, any> {
                     menuName: 'TO DO', 
                     path: '/todo', 
                     subMenu: [
-                        { menuName: 'TO DO ADD', path: '/todo/add'},
+                        { menuName: 'TO DO Add', path: '/todo/add'},
                         { menuName: 'TO DO List', path: '/todo/list'}
+                    ]
+                },
+                { 
+                    menuName: 'Contact', 
+                    path: '/contact', 
+                    subMenu: [
+                        { menuName: 'Contact Add', path: '/contact/add'},
+                        { menuName: 'Contact List', path: '/contact/list'}
                     ]
                 }
             ]
