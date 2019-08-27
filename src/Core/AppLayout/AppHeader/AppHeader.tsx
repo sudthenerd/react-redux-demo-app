@@ -45,9 +45,14 @@ class AppHeader extends Component<any, any> {
         if (window.location.pathname.includes('todo')) {
             this.props.showSideMenuItems(headerMenus[1].subMenu);
             return;
-        } else {
-            this.props.showSideMenuItems([]);
         }
+
+        if (window.location.pathname.includes('contact')) {
+            this.props.showSideMenuItems(headerMenus[2].subMenu);
+            return;
+        }
+
+        this.props.showSideMenuItems([]);
     }
 
     public render() {

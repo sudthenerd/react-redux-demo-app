@@ -8,8 +8,11 @@ import { toasterReducer } from '../Core';
 import { toDoReducer } from '../ToDo';
 import { loaderReducer } from '../Core';
 
+import { contactAddReducer } from '../Contact/ContactAdd'
+
 export default combineReducers(
     {
+        contact: contactAddReducer,
         form: formReducer,
         headerReducer,
         sideNavReducer,
