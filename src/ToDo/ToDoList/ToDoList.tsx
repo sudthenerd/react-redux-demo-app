@@ -9,6 +9,8 @@ class ToDoList extends React.Component<any, any> {
     constructor(props) {
         super(props);
 
+        console.log(this.props.appRootState);
+        
         if (this.props.todos && !this.props.todos.length) {
             this.props.getToDos();
         }
@@ -40,7 +42,8 @@ class ToDoList extends React.Component<any, any> {
 
 const mapStateToProps = (state: any) => ({
     todos: state.toDo.list,
-    fetching: state.toDo.fetching
+    fetching: state.toDo.fetching,
+    appRootState: state.form
 })
 
 const mapDispatchToProps = (dispatch: any) => ({

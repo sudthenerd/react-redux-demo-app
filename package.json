@@ -61,6 +61,7 @@
     "@types/yup": "^0.26.21",
     "cross-env": "^5.2.0",
     "redux-devtools": "^3.5.0",
+    "redux-devtools-extension": "^2.13.8",
     "typescript": "3.5.3"
   }
 }
