@@ -1,8 +1,17 @@
 import React from 'react'
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, reset } from 'redux-form';
+import { addToDoItem } from '../../ToDo/ToDoAdd/middleware/ToDoAddMiddleware';
+import { connect } from 'react-redux';
 
-const onSubmit = values => {
-  alert(JSON.stringify(values));
+const onSubmit = (values, dispatch) => {
+  console.log(values);
+  addToDoItem(
+    {
+      index: 1, 
+      name: values.firstName + ' ' + values.lastName + ' Completed Task'
+    }
+  )(dispatch);
+  // dispatch(reset('contact'));
 }
 
 const validate = values => {
@@ -25,7 +34,6 @@ const validate = values => {
 
 const createRenderer = render => ({ input, meta, label, ...rest }) => 
   <>
-    <pre>{JSON.stringify(meta, null, 1)}</pre>
     <div className="form-group">
       <label>{label}</label>
       {render(input, label, rest)}
@@ -34,7 +42,7 @@ const createRenderer = render => ({ input, meta, label, ...rest }) =>
   </>
 
 const RenderInput = createRenderer((input, label) => (
-  <input { ...input } className="form-control" type="text" autoComplete="off" />
+  <input { ...input } className="form-control" type="text" autoComplete="on" />
 ))
 
 const RenderSelect = createRenderer((input, label, { children }) => 
@@ -56,28 +64,47 @@ const SelectItems = ({items}) => (
   </>
 )
 
-const ContactForm: any = (props) => {
-    const { handleSubmit, valid } = props;
-
-    return (
-      <form onSubmit={handleSubmit}>
-          <section className="d-flex flex-column col-6 py-2 text-secondary">
-            <Field className="form-control" name="firstName" label={'First Name'} component={RenderInput} />
-            <Field className="form-control" name="lastName" label={'Last Name'} component={RenderInput} />
-            <Field className="form-control" name="email" label={'Email'} component={RenderInput} />
-            <Field className="form-control" name="famousThing" label={'Select Famous Thing'} component={RenderSelect}>
-              <SelectItems items={['Bilimora D Great', 'Valsad a Bit', '1Rivet Super']}/>
-            </Field>
-            <button type="submit" disabled={ !valid } className="col-3 btn btn-primary">Submit</button>
-          </section>
-      </form>
-    );
+let ContactForm: React.FC<any> = (props: any, state: any) => {
+  const { handleSubmit, valid, allState } = props;
+  // console.log(allState)
+  return (
+    <form onSubmit={handleSubmit}>
+        <section className="d-flex flex-column col-6 py-2 text-secondary">
+          <Field className="form-control" name="firstName" label={'First Name'} component={RenderInput} />
+          <Field className="form-control" name="lastName" label={'Last Name'} component={RenderInput} />
+          <Field className="form-control" name="email" label={'Email'} component={RenderInput} />
+          <Field className="form-control" name="famousThing" label={'Select Famous Thing'} component={RenderSelect}>
+            <SelectItems items={['Bilimora D Great', 'Valsad a Bit', '1Rivet Super']}/>
+          </Field>
+          <button type="submit" className="col-3 btn btn-primary" 
+            onClick={() => { window.setTimeout(() => {}, 500)}}>
+              Submit
+          </button>
+        </section>
+    </form>
+  );
 }
 
-export default reduxForm({
-  // a unique name for the form 
-  form: 'contact',
-  onSubmit,
-  validate,
-  destroyOnUnmount: false
-})(ContactForm)
+const mapStateToProps = (state: any) => ({
+  // initialValues: {firstName: 'A', lastName: 'B', email: 'ab@gmail.com', famousThing: 'Bilimora D Great' },
+  allState: state
+});
+
+// export default reduxForm({
+//   // a unique name for the form 
+//   form: 'contact',
+//   onSubmit,
+//   validate,
+//   destroyOnUnmount: false,
+//   initialValues: {firstName: 'A', lastName: 'B', email: 'ab@gmail.com', famousThing: 'Bilimora D Great' }
+// })(ContactForm);
+
+export default connect(mapStateToProps)(reduxForm
+  (
+    { 
+      form: 'contact',
+      onSubmit,
+      validate,
+      destroyOnUnmount: false
+    }
+  )(ContactForm))

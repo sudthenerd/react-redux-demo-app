@@ -17,8 +17,8 @@ class ContactAdd extends React.Component<any> {
   }
 
   render() {
-      {console.log(this.props.values);}
-    return <ContactForm onSubmit={this.submit} />
+    //   {console.log(this.props.values);}
+    return <ContactForm />
     // return <ContactForm onSubmit={this.submit} />
   }
 }
